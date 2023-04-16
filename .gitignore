@@ -1,0 +1,5 @@
+# Ignore logs 
+logs/
+
+# Ignore pycache
+dags/__pycache__/
