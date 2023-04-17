@@ -34,7 +34,7 @@ Configure [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/sta
 1. Once Airflow is deployed on Docker, you can access webserver link at http://localhost:8080
     - ![plot](Images/Airflow%20login.png)
 2. Find the DAG "Carpark_Airflow" inside the main UI interface. You can check the task log by clicking onto each individual tasks. Final cleaned output (See yellow highlighted) is JSON which complies with data format of XCOMS Airflow (hence no error thrown in Audit log)
-    - ![plot](Images/Airflow%20Main.png)
+    - ![plot](Images/Airflow%20DAG.png)
 3. The task ```clean_data``` pulls information from ```fetch_data``` via the function ```ti.xcom_pull(task_ids = 'XXX')```:
     - ![plot](Images/Airflow%20TI%20Xcoms.png)
 
