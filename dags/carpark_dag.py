@@ -27,17 +27,17 @@ def clean_data(ti):
     # Split carpark_info into multiple columns 
     normalize_data = pd.json_normalize(raw_df['carpark_info'])
 
-    # Join back everything and write to csv file 
+    # Join back everything and return JSON output 
     raw_df = raw_df.reset_index()
     clean_df = pd.concat([raw_df, normalize_data], axis=1)
     clean_df = clean_df.drop('carpark_info', axis=1)
-    clean_df.to_csv('Files.csv')
-
+    output = clean_df.to_json(orient = "records")
+    return output
 
 # Specify DAG default arguments
 default_args = {
     'owner': 'bmoh',
-    'retries': 5,
+    'retries': 2,
     'retry_delay': timedelta(minutes=5),
 }
 
@@ -45,7 +45,7 @@ default_args = {
 # Create DAG
 with DAG(
     default_args = default_args,
-    dag_id = "Carpark_DAG_V1",
+    dag_id = "Carpark_Airflow",
     description = 'Webscraping Data pipeline for Carpark API SG',
     start_date = datetime(2022,4,16),
     schedule_interval = "@hourly" 
